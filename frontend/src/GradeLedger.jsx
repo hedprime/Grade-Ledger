@@ -4,7 +4,7 @@ import AdminPanel from "./AdminPanel";
 import DeptHeadPanel from "./DeptHeadPanel";
 
 // ── API base URL — all requests go to the FastAPI backend ─────────────────────
-const API = "http://127.0.0.1:8000";
+const API = import.meta.env.VITE_API_URL;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function formatTime(iso) {
@@ -675,7 +675,7 @@ export default function GradeLedger() {
       const res = await axios.get(`${API}/ledger/entries`, { params });
       setEntries(res.data);
     } catch (err) {
-      setFetchError("Could not load entries. Make sure the backend is running at http://127.0.0.1:8000");
+      setFetchError("Could not load entries. Backend unavailable.");
     } finally {
       setLoading(false);
     }
